@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 const dots = [0, 1, 2];
 
@@ -11,7 +12,7 @@ export default function Loader() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1800);
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -24,7 +25,7 @@ export default function Loader() {
           transition={{ duration: 0.4, ease: 'easeInOut' }}
           className='fixed inset-0 z-9999 flex flex-col items-center justify-center bg-background'
         >
-          {/* Monogram ring */}
+          {/* Photo ring */}
           <div className='relative flex items-center justify-center mb-8'>
             {/* Outer spinning arc */}
             <motion.svg
@@ -45,17 +46,22 @@ export default function Loader() {
                 opacity='0.7'
               />
             </motion.svg>
-            {/* Inner static ring */}
-            <div className='w-20 h-20 rounded-full border border-border flex items-center justify-center bg-surface'>
-              <motion.span
-                initial={{ opacity: 0, scale: 0.7 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2, duration: 0.4 }}
-                className='text-2xl font-bold text-accent tracking-tight select-none'
-              >
-                RSP
-              </motion.span>
-            </div>
+            {/* Profile photo */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.7 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.4 }}
+              className='w-20 h-20 rounded-full overflow-hidden border border-border bg-surface'
+            >
+              <Image
+                src='/personal-photo/prince.jpeg'
+                alt='Rezoan Shakil Prince'
+                width={80}
+                height={80}
+                className='object-cover w-full h-full'
+                priority
+              />
+            </motion.div>
           </div>
 
           {/* Name */}
@@ -70,10 +76,19 @@ export default function Loader() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className='text-muted text-xs tracking-widest uppercase mb-6'
+            transition={{ delay: 0.4 }}
+            className='text-muted text-xs tracking-widest uppercase mb-1
+            '
           >
             Senior Software Engineer
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className='text-muted text-xs mb-6'
+          >
+            5+ years of experience · BJIT Ltd
           </motion.p>
 
           {/* Bouncing dots */}

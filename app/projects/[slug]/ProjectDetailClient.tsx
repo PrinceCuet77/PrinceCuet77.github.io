@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -11,6 +12,9 @@ import {
   Rocket,
   AlertTriangle,
   Camera,
+  X,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/Icons';
 import { Project } from '@/types';
@@ -20,13 +24,26 @@ interface Props {
 }
 
 export default function ProjectDetailClient({ project }: Props) {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const screenshots = project.screenshots ?? [];
+
+  const closeModal = () => setSelectedIndex(null);
+  const showPrev = () =>
+    setSelectedIndex((i) =>
+      i !== null ? (i > 0 ? i - 1 : screenshots.length - 1) : null,
+    );
+  const showNext = () =>
+    setSelectedIndex((i) =>
+      i !== null ? (i < screenshots.length - 1 ? i + 1 : 0) : null,
+    );
+
   return (
     <div className='min-h-screen bg-background'>
       {/* Back Navigation */}
       <div className='fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border'>
         <div className='max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center'>
           <Link
-            href='/#projects'
+            href='/'
             className='inline-flex items-center gap-2 text-muted hover:text-foreground transition-colors'
           >
             <ArrowLeft className='w-4 h-4' />
@@ -44,8 +61,7 @@ export default function ProjectDetailClient({ project }: Props) {
             transition={{ duration: 0.6 }}
           >
             {/* Project Image */}
-            <div className='relative aspect-video rounded-2xl overflow-hidden bg-surface border border-border mb-8'>
-              {/* Fallback shown only when image fails */}
+            {/* <div className='relative aspect-video rounded-2xl overflow-hidden bg-surface border border-border mb-8'>
               <div className='absolute inset-0 flex items-center justify-center text-muted/30 z-0'>
                 <div className='text-center'>
                   <div className='w-20 h-20 mx-auto mb-3 rounded-xl bg-accent/10 flex items-center justify-center'>
@@ -61,10 +77,10 @@ export default function ProjectDetailClient({ project }: Props) {
                 className='object-cover relative z-10'
                 priority
               />
-            </div>
+            </div> */}
 
             {/* Title & Tech */}
-            <h1 className='text-3xl md:text-4xl font-bold text-foreground mb-4'>
+            <h1 className='text-3xl md:text-4xl font-bold text-foreground mb-8'>
               {project.title}
             </h1>
 
@@ -147,12 +163,14 @@ export default function ProjectDetailClient({ project }: Props) {
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.2 + index * 0.05 }}
-                    className='relative aspect-video rounded-xl overflow-hidden bg-surface border border-border hover:border-accent/30 transition-all duration-300 group'
+                    className='relative aspect-video rounded-xl overflow-hidden bg-surface border border-border hover:border-accent/30 transition-all duration-300 group cursor-pointer'
+                    onClick={() => setSelectedIndex(index)}
                   >
                     <Image
                       src={screenshot}
                       alt={`${project.title} screenshot ${index + 1}`}
                       fill
+                      sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
                       className='object-cover transition-transform duration-500 group-hover:scale-105'
                     />
                   </motion.div>
@@ -272,15 +290,81 @@ export default function ProjectDetailClient({ project }: Props) {
             className='pt-8 border-t border-border'
           >
             <Link
-              href='/#projects'
+              href='/'
               className='inline-flex items-center gap-2 text-accent hover:text-accent-hover transition-colors font-medium'
             >
               <ArrowLeft className='w-4 h-4' />
-              Back to All Projects
+              Back to Portfolio
             </Link>
           </motion.div>
         </div>
       </main>
+
+      {/* Image lightbox modal */}
+      <AnimatePresence>
+        {selectedIndex !== null && screenshots.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className='fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4'
+            onClick={closeModal}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className='relative w-full max-w-5xl aspect-video'
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={screenshots[selectedIndex]}
+                alt={`${project.title} screenshot ${selectedIndex + 1}`}
+                fill
+                sizes='100vw'
+                className='object-contain'
+                priority
+              />
+
+              {/* Close */}
+              <button
+                onClick={closeModal}
+                className='absolute top-8 right-3 p-2 rounded-full bg-black/60 text-white hover:bg-black/90 transition-colors cursor-pointer'
+                aria-label='Close'
+              >
+                <X className='w-5 h-5' />
+              </button>
+
+              {/* Prev / Next */}
+              {screenshots.length > 1 && (
+                <>
+                  <button
+                    onClick={showPrev}
+                    className='absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 text-white hover:bg-black/90 transition-colors cursor-pointer'
+                    aria-label='Previous'
+                  >
+                    <ChevronLeft className='w-5 h-5' />
+                  </button>
+                  <button
+                    onClick={showNext}
+                    className='absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 text-white hover:bg-black/90 transition-colors cursor-pointer'
+                    aria-label='Next'
+                  >
+                    <ChevronRight className='w-5 h-5' />
+                  </button>
+                </>
+              )}
+
+              {/* Counter */}
+              <div className='absolute bottom-8 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/60 text-white text-xs'>
+                {selectedIndex + 1} / {screenshots.length}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

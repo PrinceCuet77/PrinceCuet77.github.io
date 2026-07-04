@@ -31,6 +31,8 @@ export default function Projects() {
                   src={project.image}
                   alt={project.title}
                   fill
+                  sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+                  loading={index === 0 ? 'eager' : 'lazy'}
                   className='object-cover transition-transform duration-500 group-hover:scale-105'
                 />
               </div>

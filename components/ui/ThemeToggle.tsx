@@ -20,7 +20,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      className='relative w-10 h-10 rounded-full flex items-center justify-center bg-surface hover:bg-surface-hover transition-colors duration-300'
+      className='relative w-10 h-10 rounded-full flex items-center justify-center bg-surface hover:bg-surface-hover transition-colors duration-300 cursor-pointer'
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
     >
       <motion.div

@@ -13,8 +13,8 @@ export const skillCategories: SkillCategory[] = [
     category: 'Backend & APIs',
     icon: 'Server',
     skills: [
-      { name: 'TypeScript', level: 75 },
       { name: 'JavaScript (ES6+)', level: 85 },
+      { name: 'TypeScript', level: 75 },
       { name: 'Node.js', level: 80 },
       { name: 'Express.js', level: 80 },
       { name: 'NestJS', level: 75 },

@@ -22,7 +22,7 @@ export default function Footer() {
             href='https://github.com/PrinceCuet77'
             target='_blank'
             rel='noopener noreferrer'
-            className='text-muted hover:text-accent transition-colors'
+            className='rounded-lg bg-surface hover:bg-surface-hover text-muted hover:text-accent transition-all duration-300 hover:-translate-y-1'
             aria-label='GitHub'
           >
             <GithubIcon className='w-5 h-5' />
@@ -31,7 +31,7 @@ export default function Footer() {
             href='https://www.linkedin.com/in/rezoan-shakil-prince/'
             target='_blank'
             rel='noopener noreferrer'
-            className='text-muted hover:text-accent transition-colors'
+            className='rounded-lg bg-surface hover:bg-surface-hover text-muted hover:text-accent transition-all duration-300 hover:-translate-y-1'
             aria-label='LinkedIn'
           >
             <LinkedinIcon className='w-5 h-5' />
@@ -40,14 +40,14 @@ export default function Footer() {
             href='https://wa.me/8801861164307'
             target='_blank'
             rel='noopener noreferrer'
-            className='text-muted hover:text-accent transition-colors'
+            className='rounded-lg bg-surface hover:bg-surface-hover text-muted hover:text-accent transition-all duration-300 hover:-translate-y-1'
             aria-label='WhatsApp'
           >
             <WhatsAppIcon className='w-5 h-5' />
           </a>
           <a
             href='mailto:prince.cuet.77@gmail.com'
-            className='text-muted hover:text-accent transition-colors'
+            className='rounded-lg bg-surface hover:bg-surface-hover text-muted hover:text-accent transition-all duration-300 hover:-translate-y-1'
             aria-label='Email'
           >
             <Mail className='w-5 h-5' />
@@ -58,7 +58,7 @@ export default function Footer() {
           onClick={scrollToTop}
           whileHover={{ y: -3 }}
           whileTap={{ scale: 0.9 }}
-          className='p-2 rounded-full bg-accent/10 text-accent hover:bg-accent/20 transition-colors'
+          className='p-2 rounded-full bg-accent/10 text-accent hover:bg-accent/20 transition-colors cursor-pointer'
           aria-label='Back to top'
         >
           <ArrowUp className='w-5 h-5' />
