@@ -14,8 +14,8 @@ export default function Projects() {
       title='Featured Projects'
       subtitle='A selection of projects that showcase my skills and approach to problem-solving'
     >
-      <div className='grid md:grid-cols-2 gap-8'>
-        {projects.map((project, index) => (
+      <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
+        {projects.slice(0, 3).map((project, index) => (
           <motion.div
             key={project.slug}
             initial={{ opacity: 0, y: 40 }}
@@ -32,20 +32,7 @@ export default function Projects() {
                   alt={project.title}
                   fill
                   className='object-cover transition-transform duration-500 group-hover:scale-105'
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                  }}
                 />
-                {/* Fallback placeholder for missing images */}
-                <div className='absolute inset-0 flex items-center justify-center text-muted/50'>
-                  <div className='text-center'>
-                    <div className='w-16 h-16 mx-auto mb-2 rounded-lg bg-accent/10 flex items-center justify-center'>
-                      <ExternalLink className='w-8 h-8 text-accent/40' />
-                    </div>
-                    <p className='text-xs'>Project Preview</p>
-                  </div>
-                </div>
               </div>
 
               {/* Content */}

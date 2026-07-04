@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Mail, ArrowUp } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from '@/components/ui/Icons';
+import { GithubIcon, LinkedinIcon, WhatsAppIcon } from '@/components/ui/Icons';
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -19,7 +19,7 @@ export default function Footer() {
 
         <div className='flex items-center gap-4'>
           <a
-            href='https://github.com/PrinceCuet77' // TODO: replace with actual GitHub link
+            href='https://github.com/PrinceCuet77'
             target='_blank'
             rel='noopener noreferrer'
             className='text-muted hover:text-accent transition-colors'
@@ -28,13 +28,22 @@ export default function Footer() {
             <GithubIcon className='w-5 h-5' />
           </a>
           <a
-            href='https://www.linkedin.com/in/rezoan-shakil-prince/' // TODO: replace with actual LinkedIn link
+            href='https://www.linkedin.com/in/rezoan-shakil-prince/'
             target='_blank'
             rel='noopener noreferrer'
             className='text-muted hover:text-accent transition-colors'
             aria-label='LinkedIn'
           >
             <LinkedinIcon className='w-5 h-5' />
+          </a>
+          <a
+            href='https://wa.me/8801861164307'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='text-muted hover:text-accent transition-colors'
+            aria-label='WhatsApp'
+          >
+            <WhatsAppIcon className='w-5 h-5' />
           </a>
           <a
             href='mailto:prince.cuet.77@gmail.com'

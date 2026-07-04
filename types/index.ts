@@ -22,6 +22,7 @@ export interface Project {
   githubLink: string;
   challenges: string[];
   futureImprovements: string[];
+  screenshots?: string[];
 }
 
 export interface Skill {

@@ -1,59 +1,62 @@
 import { SkillCategory } from '@/types';
 
 export const skillCategories: SkillCategory[] = [
+  // {
+  //   category: 'Programming Languages',
+  //   icon: 'Code2',
+  //   skills: [
+  //     { name: 'TypeScript', level: 75 },
+  //     { name: 'JavaScript (ES6+)', level: 85 },
+  //   ],
+  // },
   {
-    category: 'Programming Languages',
-    icon: 'Code2',
+    category: 'Backend & APIs',
+    icon: 'Server',
     skills: [
-      { name: 'TypeScript', level: 92 },
-      { name: 'JavaScript (ES6+)', level: 95 },
+      { name: 'TypeScript', level: 75 },
+      { name: 'JavaScript (ES6+)', level: 85 },
+      { name: 'Node.js', level: 80 },
+      { name: 'Express.js', level: 80 },
+      { name: 'NestJS', level: 75 },
+      { name: 'REST APIs', level: 85 },
     ],
   },
   {
     category: 'Frontend',
     icon: 'Layout',
     skills: [
-      { name: 'React.js', level: 94 },
-      { name: 'Next.js', level: 88 },
-      { name: 'HTML5', level: 95 },
-      { name: 'CSS3', level: 90 },
-      { name: 'Tailwind CSS', level: 92 },
+      { name: 'React.js', level: 80 },
+      { name: 'Next.js', level: 85 },
+      { name: 'HTML5', level: 90 },
+      { name: 'CSS3', level: 75 },
+      { name: 'Tailwind CSS', level: 80 },
     ],
   },
-  {
-    category: 'Backend & APIs',
-    icon: 'Server',
-    skills: [
-      { name: 'Node.js', level: 93 },
-      { name: 'Express.js', level: 92 },
-      { name: 'NestJS', level: 78 },
-      { name: 'REST APIs', level: 95 },
-    ],
-  },
+
   {
     category: 'Database & ORM',
     icon: 'Database',
     skills: [
-      { name: 'PostgreSQL', level: 88 },
-      { name: 'MySQL', level: 85 },
-      { name: 'MongoDB', level: 80 },
-      { name: 'Prisma ORM', level: 90 },
+      { name: 'PostgreSQL', level: 85 },
+      { name: 'MySQL', level: 80 },
+      { name: 'MongoDB', level: 75 },
+      { name: 'Prisma ORM', level: 80 },
     ],
   },
   {
     category: 'Architecture & Cloud',
     icon: 'Cloud',
     skills: [
-      { name: 'AWS', level: 82 },
-      { name: 'Docker', level: 78 },
-      { name: 'Redis', level: 83 },
+      { name: 'AWS', level: 65 },
+      { name: 'Docker', level: 60 },
+      { name: 'Redis', level: 70 },
     ],
   },
   {
     category: 'State Management',
     icon: 'Layers',
     skills: [
-      { name: 'Redux Toolkit', level: 88 },
+      { name: 'Redux Toolkit', level: 75 },
       { name: 'Jotai', level: 80 },
     ],
   },
@@ -61,11 +64,11 @@ export const skillCategories: SkillCategory[] = [
     category: 'DevOps & Tools',
     icon: 'Wrench',
     skills: [
-      { name: 'Git', level: 93 },
-      { name: 'GitHub Actions', level: 80 },
+      { name: 'Git', level: 80 },
+      { name: 'GitHub Actions', level: 60 },
       { name: 'Postman', level: 90 },
       { name: 'GitHub Copilot', level: 85 },
-      { name: 'ChatGPT', level: 88 },
+      { name: 'ChatGPT', level: 90 },
     ],
   },
 ];

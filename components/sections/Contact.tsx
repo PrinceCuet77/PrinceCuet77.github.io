@@ -12,6 +12,8 @@ import {
 } from 'lucide-react';
 import Section from '@/components/common/Section';
 
+const MAX_CHARS = 5000;
+
 export default function Contact() {
   const [formState, setFormState] = useState({
     name: '',
@@ -21,20 +23,41 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
+
+  const charCount = formState.message.length;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
+
+    if (charCount > MAX_CHARS) {
+      setError(`Message exceeds ${MAX_CHARS} characters limit.`);
+      return;
+    }
+
     setIsSubmitting(true);
 
-    // TODO: Connect to API route at /api/contact
-    // Simulating submission for now
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formState),
+      });
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setFormState({ name: '', email: '', subject: '', message: '' });
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || 'Failed to send message');
+      }
 
-    setTimeout(() => setIsSubmitted(false), 5000);
+      setIsSubmitted(true);
+      setFormState({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setIsSubmitted(false), 5000);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to send message');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -59,7 +82,7 @@ export default function Contact() {
     {
       icon: MapPin,
       label: 'Location',
-      value: 'Dhaka, Bangladesh',
+      value: 'Mirpur-14, Dhaka, Bangladesh',
       href: '#',
     },
   ];
@@ -91,35 +114,57 @@ export default function Contact() {
           </div>
 
           <div className='space-y-4'>
-            {contactInfo.map((info, index) => (
-              <motion.a
-                key={info.label}
-                href={info.href}
-                target={info.href.startsWith('http') ? '_blank' : undefined}
-                rel={
-                  info.href.startsWith('http')
-                    ? 'noopener noreferrer'
-                    : undefined
-                }
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className='flex items-center gap-4 p-4 rounded-xl bg-surface border border-border hover:border-accent/30 transition-all duration-300 group'
-              >
-                <div className='p-2.5 rounded-lg bg-accent/10 group-hover:bg-accent/20 transition-colors'>
-                  <info.icon className='w-5 h-5 text-accent' />
-                </div>
-                <div>
-                  <p className='text-xs text-muted uppercase tracking-wider'>
-                    {info.label}
-                  </p>
-                  <p className='text-foreground font-medium text-sm'>
-                    {info.value}
-                  </p>
-                </div>
-              </motion.a>
-            ))}
+            {contactInfo.map((info, index) => {
+              const isNonLink = info.href === '#';
+              const sharedClass =
+                'flex items-center gap-4 p-4 rounded-xl bg-surface border border-border transition-all duration-300 group';
+              const inner = (
+                <>
+                  <div className='p-2.5 rounded-lg bg-accent/10 group-hover:bg-accent/20 transition-colors'>
+                    <info.icon className='w-5 h-5 text-accent' />
+                  </div>
+                  <div>
+                    <p className='text-xs text-muted uppercase tracking-wider'>
+                      {info.label}
+                    </p>
+                    <p className='text-foreground font-medium text-sm'>
+                      {info.value}
+                    </p>
+                  </div>
+                </>
+              );
+
+              return isNonLink ? (
+                <motion.div
+                  key={info.label}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className={sharedClass}
+                >
+                  {inner}
+                </motion.div>
+              ) : (
+                <motion.a
+                  key={info.label}
+                  href={info.href}
+                  target={info.href.startsWith('http') ? '_blank' : undefined}
+                  rel={
+                    info.href.startsWith('http')
+                      ? 'noopener noreferrer'
+                      : undefined
+                  }
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className={`${sharedClass} hover:border-accent/30`}
+                >
+                  {inner}
+                </motion.a>
+              );
+            })}
           </div>
         </motion.div>
 
@@ -203,6 +248,7 @@ export default function Contact() {
                 id='message'
                 required
                 rows={5}
+                maxLength={MAX_CHARS}
                 value={formState.message}
                 onChange={(e) =>
                   setFormState({ ...formState, message: e.target.value })
@@ -210,7 +256,25 @@ export default function Contact() {
                 className='w-full px-4 py-3 rounded-lg bg-surface border border-border text-foreground placeholder:text-muted/50 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all duration-300 resize-none'
                 placeholder='Tell me about your project...'
               />
+              <div className='flex justify-between items-center mt-1.5'>
+                <p
+                  className={`text-xs ${charCount >= MAX_CHARS ? 'text-red-500' : 'text-muted'}`}
+                >
+                  {charCount} / {MAX_CHARS} characters
+                </p>
+                {charCount >= MAX_CHARS && (
+                  <p className='text-xs text-red-500'>
+                    Character limit reached
+                  </p>
+                )}
+              </div>
             </div>
+
+            {error && (
+              <p className='text-sm text-red-500 bg-red-500/10 px-4 py-2 rounded-lg'>
+                {error}
+              </p>
+            )}
 
             <button
               type='submit'

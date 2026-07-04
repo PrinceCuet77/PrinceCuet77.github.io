@@ -8,10 +8,12 @@ import Education from '@/components/sections/Education';
 import Projects from '@/components/sections/Projects';
 import Certifications from '@/components/sections/Certifications';
 import Contact from '@/components/sections/Contact';
+import Loader from '@/components/common/Loader';
 
 export default function Home() {
   return (
     <>
+      <Loader />
       <Navbar />
       <main className='flex-1'>
         <Hero />

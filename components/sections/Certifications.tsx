@@ -22,34 +22,34 @@ export default function Certifications() {
             transition={{ duration: 0.4, delay: index * 0.08 }}
             className='group'
           >
-            <div className='h-full p-5 rounded-xl bg-surface border border-border hover:border-accent/30 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5'>
+            <div className='h-full p-5 rounded-xl bg-surface border border-border hover:border-accent/30 transition-all duration-300 hover:shadow-lg hover:shadow-accent/5 flex flex-col'>
               <div className='flex items-start gap-3 mb-4'>
-                <div className='p-2 rounded-lg bg-accent/10 group-hover:bg-accent/20 transition-colors'>
+                <div className='p-2 rounded-lg bg-accent/10 group-hover:bg-accent/20 transition-colors shrink-0'>
                   <Award className='w-5 h-5 text-accent' />
                 </div>
                 <div className='flex-1 min-w-0'>
-                  <h3 className='font-semibold text-foreground text-sm leading-tight mb-1 line-clamp-2'>
+                  <h3 className='font-semibold text-foreground text-sm leading-tight mb-1'>
                     {cert.name}
                   </h3>
                   <p className='text-muted text-xs'>{cert.platform}</p>
                 </div>
               </div>
 
-              {cert.date && (
-                <p className='text-xs text-muted/70 mb-3'>
-                  Issued: {cert.date}
-                </p>
-              )}
+              <div className='mt-auto pt-3 flex items-center justify-between border-t border-border/50'>
+                {cert.date && (
+                  <p className='text-xs text-muted/70'>Issued: {cert.date}</p>
+                )}
 
-              <a
-                href={cert.credentialLink}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='inline-flex items-center gap-1.5 text-xs font-medium text-accent hover:text-accent-hover transition-colors'
-              >
-                <ExternalLink className='w-3 h-3' />
-                Verify Credential
-              </a>
+                <a
+                  href={cert.credentialLink}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='inline-flex items-center gap-1.5 text-xs font-medium text-accent hover:text-accent-hover transition-colors'
+                >
+                  <ExternalLink className='w-3 h-3' />
+                  Show Credentials
+                </a>
+              </div>
             </div>
           </motion.div>
         ))}

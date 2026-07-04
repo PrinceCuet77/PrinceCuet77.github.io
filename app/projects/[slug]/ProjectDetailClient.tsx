@@ -10,6 +10,7 @@ import {
   Target,
   Rocket,
   AlertTriangle,
+  Camera,
 } from 'lucide-react';
 import { GithubIcon } from '@/components/ui/Icons';
 import { Project } from '@/types';
@@ -44,18 +45,8 @@ export default function ProjectDetailClient({ project }: Props) {
           >
             {/* Project Image */}
             <div className='relative aspect-video rounded-2xl overflow-hidden bg-surface border border-border mb-8'>
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                className='object-cover'
-                priority
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                }}
-              />
-              <div className='absolute inset-0 flex items-center justify-center text-muted/30'>
+              {/* Fallback shown only when image fails */}
+              <div className='absolute inset-0 flex items-center justify-center text-muted/30 z-0'>
                 <div className='text-center'>
                   <div className='w-20 h-20 mx-auto mb-3 rounded-xl bg-accent/10 flex items-center justify-center'>
                     <Rocket className='w-10 h-10 text-accent/40' />
@@ -63,6 +54,13 @@ export default function ProjectDetailClient({ project }: Props) {
                   <p className='text-sm'>Project Screenshot</p>
                 </div>
               </div>
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                className='object-cover relative z-10'
+                priority
+              />
             </div>
 
             {/* Title & Tech */}
@@ -83,24 +81,33 @@ export default function ProjectDetailClient({ project }: Props) {
 
             {/* Action Buttons */}
             <div className='flex flex-wrap gap-3 mb-12'>
-              <a
-                href={project.liveLink}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-white font-medium rounded-lg hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/25'
-              >
-                <ExternalLink className='w-4 h-4' />
-                Live Demo
-              </a>
-              <a
-                href={project.githubLink}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='inline-flex items-center gap-2 px-5 py-2.5 border border-border text-foreground font-medium rounded-lg hover:border-accent/30 hover:bg-surface transition-all duration-300'
-              >
-                <GithubIcon className='w-4 h-4' />
-                Source Code
-              </a>
+              {project.liveLink && (
+                <a
+                  href={project.liveLink}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-white font-medium rounded-lg hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/25'
+                >
+                  <ExternalLink className='w-4 h-4' />
+                  Live Demo
+                </a>
+              )}
+              {project.githubLink && (
+                <a
+                  href={project.githubLink}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='inline-flex items-center gap-2 px-5 py-2.5 border border-border text-foreground font-medium rounded-lg hover:border-accent/30 hover:bg-surface transition-all duration-300'
+                >
+                  <GithubIcon className='w-4 h-4' />
+                  Source Code
+                </a>
+              )}
+              {!project.liveLink && !project.githubLink && (
+                <span className='inline-flex items-center gap-2 px-5 py-2.5 text-muted text-sm bg-surface border border-border rounded-lg'>
+                  Production client project — source code is proprietary
+                </span>
+              )}
             </div>
           </motion.div>
 
@@ -118,6 +125,41 @@ export default function ProjectDetailClient({ project }: Props) {
               {project.description}
             </p>
           </motion.section>
+
+          {/* Screenshots Gallery */}
+          {project.screenshots && project.screenshots.length > 0 && (
+            <motion.section
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className='mb-12'
+            >
+              <div className='flex items-center gap-3 mb-6'>
+                <Camera className='w-6 h-6 text-accent' />
+                <h2 className='text-2xl font-bold text-foreground'>
+                  Screenshots
+                </h2>
+              </div>
+              <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
+                {project.screenshots.map((screenshot, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.2 + index * 0.05 }}
+                    className='relative aspect-video rounded-xl overflow-hidden bg-surface border border-border hover:border-accent/30 transition-all duration-300 group'
+                  >
+                    <Image
+                      src={screenshot}
+                      alt={`${project.title} screenshot ${index + 1}`}
+                      fill
+                      className='object-cover transition-transform duration-500 group-hover:scale-105'
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.section>
+          )}
 
           {/* What Makes It Unique */}
           <motion.section

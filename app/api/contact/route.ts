@@ -22,16 +22,34 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Implement actual email sending logic here
-    // Options: SendGrid, Resend, Nodemailer, or any email service
-    // Example with Resend:
-    // const resend = new Resend(process.env.RESEND_API_KEY);
-    // await resend.emails.send({
-    //   from: 'Portfolio <noreply@yourdomain.com>',
-    //   to: 'prince.cuet.77@gmail.com',
-    //   subject: `Portfolio Contact: ${subject}`,
-    //   html: `<p>Name: ${name}</p><p>Email: ${email}</p><p>Message: ${message}</p>`,
-    // });
+    // Character count validation (max 5000 chars)
+    if (message.length > 5000) {
+      return NextResponse.json(
+        { error: 'Message exceeds 5000 characters limit' },
+        { status: 400 },
+      );
+    }
+
+    // Send email using Web3Forms (free, no SMTP setup needed)
+    const web3formsResponse = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_key: process.env.WEB3FORMS_ACCESS_KEY,
+        from_name: name,
+        reply_to: email,
+        subject: `Portfolio Contact: ${subject}`,
+        message: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`,
+      }),
+    });
+
+    const result = await web3formsResponse.json();
+    if (!result.success) {
+      return NextResponse.json(
+        { error: 'Failed to send message. Please try again.' },
+        { status: 500 },
+      );
+    }
 
     return NextResponse.json(
       { message: 'Message sent successfully' },
