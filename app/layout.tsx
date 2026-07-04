@@ -45,6 +45,7 @@ const jsonLd = {
     'https://www.linkedin.com/in/rezoan-shakil-prince/',
   ],
   knowsAbout: [
+    'JavaScript (ES6+)',
     'Node.js',
     'React.js',
     'Next.js',
@@ -59,7 +60,7 @@ const jsonLd = {
     'Software Engineering',
   ],
   description:
-    'Senior Software Engineer at BJIT Ltd with 5+ years of experience building scalable full-stack enterprise applications using Node.js, React.js, Next.js, and TypeScript.',
+    'Senior Software Engineer at BJIT Ltd with 5+ years of experience building scalable full-stack enterprise applications using Node.js, NestJS, React.js, Next.js, JavaScript (ES6+) and TypeScript.',
 };
 
 export const metadata: Metadata = {
@@ -69,7 +70,7 @@ export const metadata: Metadata = {
     template: '%s | Rezoan Shakil Prince',
   },
   description:
-    'Rezoan Shakil Prince — Senior Software Engineer at BJIT Ltd. 5+ years building full-stack enterprise applications with Node.js, React.js, Next.js, TypeScript, and cloud-native architectures.',
+    'Rezoan Shakil Prince — Senior Software Engineer at BJIT Ltd. 5+ years building full-stack enterprise applications with Node.js, NestJS, React.js, Next.js, JavaScript (ES6+), TypeScript, and cloud-native architectures (AWS).',
   keywords: [
     'Rezoan Shakil Prince',
     'Rezoan Prince',
@@ -88,6 +89,7 @@ export const metadata: Metadata = {
     'TypeScript Developer',
     'Express.js',
     'NestJS',
+    'NestJS Developer',
     'Software Engineer Bangladesh',
     'Dhaka Software Engineer',
     'Bangladesh Developer',
@@ -117,7 +119,7 @@ export const metadata: Metadata = {
     siteName: 'Rezoan Shakil Prince — Portfolio',
     title: 'Rezoan Shakil Prince | Senior Software Engineer',
     description:
-      'Rezoan Shakil Prince — Senior Software Engineer at BJIT Ltd. Building scalable full-stack applications with Node.js, React.js, Next.js, and TypeScript.',
+      'Rezoan Shakil Prince — Senior Software Engineer at BJIT Ltd with 5+ years of experience building scalable full-stack enterprise applications using Node.js, NestJS, React.js, Next.js, JavaScript (ES6+) and TypeScript.',
     firstName: 'Rezoan Shakil',
     lastName: 'Prince',
     username: 'rezoan-shakil-prince',
@@ -126,7 +128,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Rezoan Shakil Prince | Senior Software Engineer',
     description:
-      'Senior Software Engineer at BJIT Ltd. Full-stack developer specializing in Node.js, React.js, Next.js, and TypeScript.',
+      'Senior Software Engineer at BJIT Ltd. Full-stack developer specializing in Node.js, NestJS, React.js, Next.js, JavaScript (ES6+) and TypeScript.',
     creator: '@rezoanshakil',
   },
   category: 'technology',
