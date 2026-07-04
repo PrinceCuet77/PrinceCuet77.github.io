@@ -1,6 +1,7 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "Rezoan Shakil Prince — Portfolio",
+  "short_name": "Rezoan Prince",
+  "description": "Senior Software Engineer | Full Stack Developer | BJIT Ltd",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",

@@ -13,33 +13,123 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-export const metadata: Metadata = {
-  title: 'Rezoan Shakil Prince | Senior Software Engineer | BJIT',
-  description:
-    'Full Stack Developer specializing in Node.js, React, Next.js, and cloud-native architectures. 5+ years of experience building scalable enterprise applications.',
-  openGraph: {
-    title: 'Rezoan Shakil Prince | Senior Software Engineer',
-    description:
-      'Full Stack Developer specializing in JavaScript (ES6), TypeScript, Node.js, Express.js, NestJS, React.js, Next.js, and cloud-native architectures.',
-    type: 'website',
-    locale: 'en_US',
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://princecuet77.github.io/';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Rezoan Shakil Prince',
+  alternateName: ['Prince', 'Rezoan Prince', 'Shakil Prince'],
+  url: SITE_URL,
+  image: `${SITE_URL}/personal-photo/photo.jpg`,
+  jobTitle: 'Senior Software Engineer',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'BJIT Ltd',
+    url: 'https://bjitgroup.com',
   },
-  keywords: [
-    'Rezoan Shakil Prince',
-    'Prince',
-    'Full Stack Developer',
-    'Senior Software Engineer',
-    'React.js',
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: 'Chittagong University of Engineering and Technology',
+    alternateName: 'CUET',
+    url: 'https://www.cuet.ac.bd',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Dhaka',
+    addressCountry: 'BD',
+  },
+  sameAs: [
+    'https://github.com/PrinceCuet77',
+    'https://www.linkedin.com/in/rezoan-shakil-prince/',
+  ],
+  knowsAbout: [
     'Node.js',
-    'Express.js',
-    'Nest.js',
+    'React.js',
     'Next.js',
     'TypeScript',
-    'BJIT',
-    'BJIT Ltd',
-    'CUET',
-    'Bangladesh',
+    'Express.js',
+    'NestJS',
+    'PostgreSQL',
+    'MySQL',
+    'Redis',
+    'AWS',
+    'Full Stack Development',
+    'Software Engineering',
   ],
+  description:
+    'Senior Software Engineer at BJIT Ltd with 5+ years of experience building scalable full-stack enterprise applications using Node.js, React.js, Next.js, and TypeScript.',
+};
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'Rezoan Shakil Prince | Senior Software Engineer',
+    template: '%s | Rezoan Shakil Prince',
+  },
+  description:
+    'Rezoan Shakil Prince — Senior Software Engineer at BJIT Ltd. 5+ years building full-stack enterprise applications with Node.js, React.js, Next.js, TypeScript, and cloud-native architectures.',
+  keywords: [
+    'Rezoan Shakil Prince',
+    'Rezoan Prince',
+    'Shakil Prince',
+    'Prince BJIT',
+    'Prince CUET',
+    'Senior Software Engineer',
+    'Full Stack Developer',
+    'Full Stack Engineer',
+    'BJIT Ltd',
+    'BJIT Group',
+    'CUET CSE',
+    'Node.js Developer',
+    'React.js Developer',
+    'Next.js Developer',
+    'TypeScript Developer',
+    'Express.js',
+    'NestJS',
+    'Software Engineer Bangladesh',
+    'Dhaka Software Engineer',
+    'Bangladesh Developer',
+    'Portfolio',
+  ],
+  authors: [{ name: 'Rezoan Shakil Prince', url: SITE_URL }],
+  creator: 'Rezoan Shakil Prince',
+  publisher: 'Rezoan Shakil Prince',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    type: 'profile',
+    locale: 'en_US',
+    url: SITE_URL,
+    siteName: 'Rezoan Shakil Prince — Portfolio',
+    title: 'Rezoan Shakil Prince | Senior Software Engineer',
+    description:
+      'Rezoan Shakil Prince — Senior Software Engineer at BJIT Ltd. Building scalable full-stack applications with Node.js, React.js, Next.js, and TypeScript.',
+    firstName: 'Rezoan Shakil',
+    lastName: 'Prince',
+    username: 'rezoan-shakil-prince',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Rezoan Shakil Prince | Senior Software Engineer',
+    description:
+      'Senior Software Engineer at BJIT Ltd. Full-stack developer specializing in Node.js, React.js, Next.js, and TypeScript.',
+    creator: '@rezoanshakil',
+  },
+  category: 'technology',
 };
 
 export default function RootLayout({
@@ -54,6 +144,12 @@ export default function RootLayout({
       suppressHydrationWarning
       data-scroll-behavior='smooth'
     >
+      <head>
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className='min-h-full flex flex-col bg-background text-foreground'
         suppressHydrationWarning
