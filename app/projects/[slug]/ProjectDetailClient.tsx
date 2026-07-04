@@ -172,6 +172,8 @@ export default function ProjectDetailClient({ project }: Props) {
                       fill
                       sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
                       className='object-cover transition-transform duration-500 group-hover:scale-105'
+                      loading={index < 4 ? 'eager' : 'lazy'}
+                      priority={index < 4}
                     />
                   </motion.div>
                 ))}
@@ -243,7 +245,7 @@ export default function ProjectDetailClient({ project }: Props) {
                   key={index}
                   className='flex items-start gap-3 p-4 rounded-lg bg-surface border border-border'
                 >
-                  <span className='mt-1 text-amber-500 font-bold text-sm'>
+                  <span className='mt-0.25 text-amber-500 font-bold text-sm'>
                     {index + 1}.
                   </span>
                   <span className='text-muted text-sm leading-relaxed'>
@@ -273,7 +275,9 @@ export default function ProjectDetailClient({ project }: Props) {
                   key={index}
                   className='flex items-start gap-3 p-4 rounded-lg bg-surface border border-border'
                 >
-                  <span className='mt-1 text-accent font-bold text-sm'>→</span>
+                  <span className='-mt-0.25 text-accent font-bold text-sm'>
+                    →
+                  </span>
                   <span className='text-muted text-sm leading-relaxed'>
                     {improvement}
                   </span>
@@ -323,7 +327,7 @@ export default function ProjectDetailClient({ project }: Props) {
                 src={screenshots[selectedIndex]}
                 alt={`${project.title} screenshot ${selectedIndex + 1}`}
                 fill
-                sizes='100vw'
+                sizes='(max-width: 1024px) calc(100vw - 2rem), 1024px'
                 className='object-contain'
                 priority
               />
@@ -331,7 +335,7 @@ export default function ProjectDetailClient({ project }: Props) {
               {/* Close */}
               <button
                 onClick={closeModal}
-                className='absolute top-8 right-3 p-2 rounded-full bg-black/60 text-white hover:bg-black/90 transition-colors cursor-pointer'
+                className='absolute top-3 sm:top-8 right-3 p-2 rounded-full bg-black/60 text-white hover:bg-black/90 transition-colors cursor-pointer'
                 aria-label='Close'
               >
                 <X className='w-5 h-5' />
@@ -358,7 +362,7 @@ export default function ProjectDetailClient({ project }: Props) {
               )}
 
               {/* Counter */}
-              <div className='absolute bottom-8 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/60 text-white text-xs'>
+              <div className='absolute bottom-3 sm:bottom-8 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/60 text-white text-xs'>
                 {selectedIndex + 1} / {screenshots.length}
               </div>
             </motion.div>

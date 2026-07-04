@@ -27,6 +27,13 @@ export default function Contact() {
 
   const charCount = formState.message.length;
 
+  const isFormValid =
+    formState.name.trim() !== '' &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email) &&
+    formState.subject.trim() !== '' &&
+    formState.message.trim() !== '' &&
+    charCount <= MAX_CHARS;
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -39,15 +46,21 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formState),
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
+          from_name: formState.name,
+          reply_to: formState.email,
+          subject: `Portfolio Contact: ${formState.subject}`,
+          message: `Name: ${formState.name}\nEmail: ${formState.email}\nSubject: ${formState.subject}\n\nMessage:\n${formState.message}`,
+        }),
       });
 
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || 'Failed to send message');
+      const data = await response.json();
+      if (!data.success) {
+        throw new Error(data.message || 'Failed to send message');
       }
 
       setIsSubmitted(true);
@@ -71,7 +84,7 @@ export default function Contact() {
       icon: Phone,
       label: 'Phone',
       value: '(+88) 01515283220',
-      href: 'tel:+8801515283220',
+      href: '#',
     },
     {
       icon: MessageSquare,
@@ -253,7 +266,7 @@ export default function Contact() {
                 onChange={(e) =>
                   setFormState({ ...formState, message: e.target.value })
                 }
-                className='w-full px-4 py-3 rounded-lg bg-surface border border-border text-foreground placeholder:text-muted/50 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all duration-300 resize-none'
+                className='w-full px-4 py-6 rounded-lg bg-surface border border-border text-foreground placeholder:text-muted/50 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 transition-all duration-300 resize-none'
                 placeholder='Tell me about your project...'
               />
               <div className='flex justify-between items-center mt-1.5'>
@@ -278,7 +291,7 @@ export default function Contact() {
 
             <button
               type='submit'
-              disabled={isSubmitting}
+              disabled={isSubmitting || !isFormValid}
               className='w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-accent text-white font-medium rounded-lg hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/25 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer'
             >
               {isSubmitting ? (

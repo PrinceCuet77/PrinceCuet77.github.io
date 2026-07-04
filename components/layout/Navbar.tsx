@@ -14,6 +14,7 @@ export default function Navbar() {
   const activeSection = useScrollSpy(sectionIds);
 
   useEffect(() => {
+    setIsScrolled(window.scrollY > 20);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };

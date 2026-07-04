@@ -30,31 +30,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Send email using Web3Forms (free, no SMTP setup needed)
-    const web3formsResponse = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        access_key: process.env.WEB3FORMS_ACCESS_KEY,
-        from_name: name,
-        reply_to: email,
-        subject: `Portfolio Contact: ${subject}`,
-        message: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`,
-      }),
-    });
-
-    const result = await web3formsResponse.json();
-    if (!result.success) {
-      return NextResponse.json(
-        { error: 'Failed to send message. Please try again.' },
-        { status: 500 },
-      );
-    }
-
-    return NextResponse.json(
-      { message: 'Message sent successfully' },
-      { status: 200 },
-    );
+    return NextResponse.json({ message: 'Validation passed' }, { status: 200 });
   } catch {
     return NextResponse.json(
       { error: 'Internal server error' },

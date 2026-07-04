@@ -6,7 +6,7 @@ export const education: Education[] = [
     degree: 'B.Sc. in Computer Science & Engineering',
     institution: 'Chittagong University of Engineering and Technology (CUET)',
     location: 'Chittagong',
-    duration: 'Mar 2015 – Apr 2021',
+    duration: '2015 – 2021',
     result: 'CGPA: 3.37 / 4.00',
   },
   {
