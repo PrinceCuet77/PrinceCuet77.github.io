@@ -303,10 +303,6 @@ export const metadata: Metadata = {
     images: ['/personal-photo/prince.jpeg'],
   },
   category: 'technology',
-  verification: {},
-  other: {
-    'google-site-verification': 'DL5N23dLO08p8sWCpDs2Jr6I00rmEHQLa1RQ7bLHgsY',
-  },
 };
 
 export default function RootLayout({
