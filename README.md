@@ -1,3 +1,3 @@
-# Personal Portfolio
+# Portfolio
 
-[Preview]()
+[Visit my personal website](https://princecuet77.github.io/)

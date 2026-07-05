@@ -23,11 +23,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${project.title} | Rezoan Shakil Prince`,
-    description: project.shortDescription,
+    description: `${project.shortDescription} — Built by Rezoan Shakil Prince, Senior Software Engineer at BJIT Ltd. Technologies: ${project.techStack.join(', ')}.`,
+    keywords: [
+      project.title,
+      'Rezoan Shakil Prince',
+      'Prince BJIT',
+      'Prince CUET',
+      ...project.techStack,
+    ],
+    authors: [{ name: 'Rezoan Shakil Prince' }],
     openGraph: {
-      title: project.title,
+      title: `${project.title} | Rezoan Shakil Prince`,
       description: project.shortDescription,
       type: 'article',
+      images: project.image ? [project.image] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${project.title} | Rezoan Shakil Prince`,
+      description: project.shortDescription,
     },
   };
 }
