@@ -52,7 +52,7 @@ export default function ProjectDetailClient({ project }: Props) {
         </div>
       </div>
 
-      <main className='pt-24 pb-16 px-4 sm:px-6 lg:px-8'>
+      <main className='pt-24 pb-6 px-4 sm:px-6 lg:px-8'>
         <div className='max-w-5xl mx-auto'>
           {/* Hero */}
           <motion.div
