@@ -121,7 +121,7 @@ export default function ProjectDetailClient({ project }: Props) {
               )}
               {!project.liveLink && !project.githubLink && (
                 <span className='inline-flex items-center gap-2 px-5 py-2.5 text-muted text-sm bg-surface border border-border rounded-lg'>
-                  Production client project — source code is proprietary
+                  Production client project - source code is proprietary
                 </span>
               )}
             </div>

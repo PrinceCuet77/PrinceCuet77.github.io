@@ -125,7 +125,7 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Rezoan Shakil Prince — Portfolio',
+    name: 'Rezoan Shakil Prince - Portfolio',
     alternateName: [
       'Prince Portfolio',
       'Prince Developer Portfolio',
@@ -133,7 +133,7 @@ const jsonLd = [
     ],
     url: SITE_URL,
     description:
-      'Portfolio of Rezoan Shakil Prince — Senior Software Engineer at BJIT Ltd specializing in Node.js, NestJS, React.js, Next.js, TypeScript, and cloud-native architectures.',
+      'Portfolio of Rezoan Shakil Prince - Senior Software Engineer at BJIT Ltd specializing in Node.js, NestJS, React.js, Next.js, TypeScript, and cloud-native architectures.',
     author: {
       '@type': 'Person',
       name: 'Rezoan Shakil Prince',
@@ -149,7 +149,7 @@ export const metadata: Metadata = {
     template: '%s | Rezoan Shakil Prince',
   },
   description:
-    'Rezoan Shakil Prince — Senior Software Engineer at BJIT Ltd, Bangladesh. 5+ years building scalable full-stack enterprise applications with Node.js, NestJS, React.js, Next.js, JavaScript (ES6+), TypeScript, PostgreSQL, Redis, and AWS. CUET CSE graduate.',
+    'Rezoan Shakil Prince - Senior Software Engineer at BJIT Ltd, Bangladesh. 5+ years of experience building scalable full-stack enterprise applications with Node.js, NestJS, React.js, Next.js, JavaScript (ES6+), TypeScript, PostgreSQL, Redis, and AWS. CUET CSE graduate.',
   keywords: [
     // Primary name variations
     'Rezoan Shakil Prince',
@@ -169,6 +169,7 @@ export const metadata: Metadata = {
     'Prince Software Engineer',
     'Prince Developer',
     'Prince Full Stack Developer',
+    'Prince Senior Full Stack Developer',
     'Prince Senior Software Engineer',
     'Rezoan Shakil Prince BJIT',
     'Rezoan Shakil Prince CUET',
@@ -183,9 +184,12 @@ export const metadata: Metadata = {
     'Senior Software Engineer Dhaka',
     'Senior Software Engineer BJIT',
     'Full Stack Developer',
+    'Senior Full Stack Developer',
     'Full Stack Engineer',
     'Full Stack Developer Bangladesh',
+    'Senior Full Stack Developer Bangladesh',
     'Full Stack Developer Dhaka',
+    'Senior Full Stack Developer Dhaka',
     'Backend Engineer',
     'Backend Developer Bangladesh',
     'Frontend Developer Bangladesh',
@@ -277,10 +281,10 @@ export const metadata: Metadata = {
     type: 'profile',
     locale: 'en_US',
     url: SITE_URL,
-    siteName: 'Rezoan Shakil Prince — Portfolio',
+    siteName: 'Rezoan Shakil Prince - Portfolio',
     title: 'Rezoan Shakil Prince | Senior Software Engineer at BJIT Ltd',
     description:
-      'Rezoan Shakil Prince — Senior Software Engineer at BJIT Ltd, Bangladesh. 5+ years building scalable full-stack enterprise applications with Node.js, NestJS, React.js, Next.js, TypeScript, PostgreSQL, Redis, and AWS. CUET CSE graduate.',
+      'Rezoan Shakil Prince - Senior Software Engineer at BJIT Ltd, Bangladesh. 5+ years of experience building scalable full-stack enterprise applications with Node.js, NestJS, React.js, Next.js, TypeScript, PostgreSQL, Redis, and AWS. CUET CSE graduate.',
     firstName: 'Rezoan Shakil',
     lastName: 'Prince',
     username: 'rezoan-shakil-prince',
@@ -289,7 +293,7 @@ export const metadata: Metadata = {
         url: '/personal-photo/prince.jpeg',
         width: 1200,
         height: 630,
-        alt: 'Rezoan Shakil Prince — Senior Software Engineer',
+        alt: 'Rezoan Shakil Prince - Senior Software Engineer',
         type: 'image/jpeg',
       },
     ],

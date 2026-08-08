@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${project.title} | Rezoan Shakil Prince`,
-    description: `${project.shortDescription} — Built by Rezoan Shakil Prince, Senior Software Engineer at BJIT Ltd. Technologies: ${project.techStack.join(', ')}.`,
+    description: `${project.shortDescription} - Built by Rezoan Shakil Prince, Senior Software Engineer at BJIT Ltd. Technologies: ${project.techStack.join(', ')}.`,
     keywords: [
       project.title,
       'Rezoan Shakil Prince',

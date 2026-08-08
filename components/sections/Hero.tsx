@@ -9,7 +9,7 @@ import Image from 'next/image';
 export default function Hero() {
   const designations = [
     'Senior Software Engineer',
-    'Full Stack Developer',
+    'Senior Full Stack Developer',
     'React & Node.js Specialist',
     'Cloud Architecture Enthusiast',
   ];
@@ -70,7 +70,7 @@ export default function Hero() {
               transition={{ delay: 0.5 }}
               className='text-muted text-lg mb-8 max-w-lg leading-relaxed'
             >
-              Building scalable, enterprise-grade applications with 5+ years of
+              Building scalable, enterprise-grade applications with 5+ years of expertise in
               expertise in Node.js, React, and cloud-native architectures.
             </motion.p>
 
@@ -82,7 +82,7 @@ export default function Hero() {
               className='flex flex-wrap gap-4 mb-8'
             >
               <a
-                href='/resume/REZOAN_SHAKIL_PRINCE_RESUME.pdf'
+                href='/resume/REZOAN_SHAKIL.pdf'
                 target='_blank'
                 rel='noopener noreferrer'
                 className='inline-flex items-center gap-2 px-6 py-3 bg-accent text-white font-medium rounded-lg hover:bg-accent-hover transition-all duration-300 hover:shadow-lg hover:shadow-accent/25 hover:-translate-y-0.5'
@@ -192,7 +192,7 @@ export default function Hero() {
               <div className='absolute bottom-8 left-0 w-2 h-2 bg-accent/60 rounded-full animate-bounce delay-500' />
             </div>
 
-            {/* Experience Badge — below the photo */}
+            {/* Experience Badge - below the photo */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
